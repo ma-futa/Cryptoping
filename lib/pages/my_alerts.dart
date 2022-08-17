@@ -1,6 +1,9 @@
 import 'package:crypto_ping_v1/pages/set_alert_page.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/main_drawer.dart';
+import '../widgets/pigeon_menu.dart';
+
 class MyAlerts extends StatelessWidget {
   static String route = "/MyAlertsRoute";
 

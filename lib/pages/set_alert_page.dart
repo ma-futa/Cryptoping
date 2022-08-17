@@ -1,6 +1,7 @@
 import 'package:crypto_ping_v1/pages/my_alerts.dart';
-import 'package:crypto_ping_v1/pages/profile_page.dart';
 import 'package:flutter/material.dart';
+import '../widgets/main_drawer.dart';
+import '../widgets/pigeon_menu.dart';
 
 class SetAlertPage extends StatelessWidget {
   static String route = "/SetAlertPageRoute";
@@ -192,104 +193,6 @@ class SetAlertPage extends StatelessWidget {
         ]),
       ),
       drawer: MainDrawer(),
-    );
-  }
-}
-
-class MainDrawer extends StatelessWidget {
-  const MainDrawer({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    print(ModalRoute.of(context)?.settings.name);
-    return Drawer(
-        width: 150,
-        child: Container(
-          color: theme.primaryColor,
-          // decoration: BoxDecoration(
-          //   image: DecorationImage(
-          //     repeat: ImageRepeat.repeatY,
-          //     image: AssetImage('assets/background.jpg'),
-          //   ),
-          // ),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              // crossAxisAlignment: CrossAxisAlignment.stretch,
-              // mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                    onPressed: () =>
-                        Navigator.of(context).pushNamed(ProfilePage.route),
-                    icon: Icon(Icons.account_circle),
-                    iconSize: 45),
-                // Text('Profile'),
-                SizedBox(height: 20),
-                if (ModalRoute.of(context)?.settings.name ==
-                    "/SetAlertPageRoute")
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Colors.black),
-                    onPressed: () =>
-                        Navigator.of(context).pushNamed(MyAlerts.route),
-                    child: Text('My Alerts',
-                        style: TextStyle(color: Colors.white)),
-                  ),
-                if (ModalRoute.of(context)?.settings.name == "/MyAlertsRoute")
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Colors.black),
-                    onPressed: () =>
-                        Navigator.of(context).pushNamed(SetAlertPage.route),
-                    child: Text('Set Alerts',
-                        style: TextStyle(color: Colors.white)),
-                  ),
-                SizedBox(height: 20),
-                ToggleButtons(
-                    borderRadius: BorderRadius.circular(30),
-                    selectedColor: Colors.black,
-                    fillColor: theme.backgroundColor,
-                    children: [Icon(Icons.sunny), Icon(Icons.nightlight)],
-                    isSelected: const [true, false],
-                    onPressed: (_) {}),
-                SizedBox(height: 250),
-              ],
-            ),
-          ),
-        ));
-  }
-}
-
-class PigeonMenu extends StatelessWidget {
-  const PigeonMenu({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return InkWell(
-      onTap: () => Scaffold.of(context).openDrawer(),
-      child: Container(
-        height: 50,
-        width: 40,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          border: Border.all(
-            width: 3,
-            color: theme.primaryColor,
-          ),
-        ),
-        padding: EdgeInsets.all(5),
-        margin: EdgeInsets.all(5),
-        child: Image.asset(
-          'assets/pigeon.png',
-          color: theme.primaryColor,
-          fit: BoxFit.fill,
-          // width: 100,
-        ),
-      ),
     );
   }
 }
