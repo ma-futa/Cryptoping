@@ -34,17 +34,17 @@ class MainDrawer extends StatelessWidget {
                 IconButton(
                     onPressed: () =>
                         Navigator.of(context).pushNamed(ProfilePage.route),
-                    icon: Icon(Icons.account_circle),
+                    icon: const Icon(Icons.account_circle),
                     iconSize: 45),
                 // Text('Profile'),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 if (ModalRoute.of(context)?.settings.name ==
                     "/SetAlertPageRoute")
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Colors.black),
                     onPressed: () =>
                         Navigator.of(context).pushNamed(MyAlerts.route),
-                    child: Text('My Alerts',
+                    child: const Text('My Alerts',
                         style: TextStyle(color: Colors.white)),
                   ),
                 if (ModalRoute.of(context)?.settings.name == "/MyAlertsRoute")
