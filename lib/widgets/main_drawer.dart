@@ -7,6 +7,7 @@ import '../pages/my_alerts.dart';
 import '../pages/profile_page.dart';
 import '../pages/set_alert_page.dart';
 import '../providers/theme_provider.dart';
+import '../providers/user_provider.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({
@@ -21,17 +22,9 @@ class MainDrawer extends StatelessWidget {
         width: 150,
         child: Container(
           color: theme.primaryColor,
-          // decoration: BoxDecoration(
-          //   image: DecorationImage(
-          //     repeat: ImageRepeat.repeatY,
-          //     image: AssetImage('assets/background.jpg'),
-          //   ),
-          // ),
           child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              // crossAxisAlignment: CrossAxisAlignment.stretch,
-              // mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(height: 200),
                 IconButton(
@@ -39,7 +32,8 @@ class MainDrawer extends StatelessWidget {
                         Navigator.of(context).pushNamed(ProfilePage.route),
                     icon: const Icon(Icons.account_circle),
                     iconSize: 45),
-                // Text('Profile'),
+                Text('Welcome back'),
+                Text(Provider.of<UserProvider>(context).getUser.name),
                 const SizedBox(height: 20),
                 if (ModalRoute.of(context)?.settings.name ==
                     "/SetAlertPageRoute")
@@ -71,7 +65,6 @@ class MainDrawer extends StatelessWidget {
                     onPressed: (_) =>
                         Provider.of<ThemeProvider>(context, listen: false)
                             .changeTheme()),
-
                 Spacer(),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: Colors.black),

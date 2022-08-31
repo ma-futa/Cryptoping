@@ -114,6 +114,7 @@ class _SignupWidgetState extends State<SignupWidget> {
 
   String _name = '';
   String _email = "";
+  String _number = "";
   String _password = "";
 
   @override
@@ -131,7 +132,7 @@ class _SignupWidgetState extends State<SignupWidget> {
     try {
       final userAttributes = <CognitoUserAttributeKey, String>{
         CognitoUserAttributeKey.email: _email,
-        //CognitoUserAttributeKey.phoneNumber: '+15559101234',
+        CognitoUserAttributeKey.phoneNumber: _number,
         // additional attributes as needed
       };
       print('xxxxxxxxxxxxx1');
@@ -205,6 +206,19 @@ class _SignupWidgetState extends State<SignupWidget> {
                 },
                 decoration: InputDecoration(
                   hintText: 'Email',
+                ),
+              ),
+              TextFormField(
+                validator: ((value) {
+                  if (value == null) {
+                    return 'Please provide valid phone number';
+                  }
+                }),
+                onSaved: (newValue) {
+                  _number = newValue!;
+                },
+                decoration: InputDecoration(
+                  hintText: 'Phone number',
                 ),
               ),
               TextFormField(

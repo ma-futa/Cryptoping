@@ -97,9 +97,13 @@ Future<void> loadCurrentUser(BuildContext context) async {
     final currentUser = await Amplify.Auth.getCurrentUser();
     final attributes = await Amplify.Auth.fetchUserAttributes();
     print('ccccccc');
-    print('${currentUser.username} xxxxxx $attributes');
-    Provider.of<UserProvider>(context, listen: false).setUser(
-        UserModel(name: currentUser.username, email: attributes[0].value));
+
+    print(
+        '${currentUser.username} xxxxxx ${attributes[4].value} xxxxxx ${attributes[3].value}');
+    Provider.of<UserProvider>(context, listen: false).setUser(UserModel(
+        name: currentUser.username,
+        email: attributes[4].value,
+        number: attributes[3].value));
   } on AuthException catch (e) {
     print(e.message);
   }
