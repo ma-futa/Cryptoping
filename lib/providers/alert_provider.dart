@@ -1,6 +1,9 @@
+import 'package:crypto_ping_v1/models/alert_model.dart';
 import 'package:flutter/cupertino.dart';
 
 class AlertProvider extends ChangeNotifier {
+  // AlertModel _value = new AlertModel();
+
   int _notificationMethod = 0;
   int _currency = 0;
   int _isAbove = 0;

@@ -43,15 +43,15 @@ class MainDrawer extends StatelessWidget {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Colors.black),
                     onPressed: () =>
-                        Navigator.of(context).pushNamed(MyAlerts.route),
+                        Navigator.of(context).popAndPushNamed(MyAlerts.route),
                     child: const Text('My Alerts',
                         style: TextStyle(color: Colors.white)),
                   ),
                 if (ModalRoute.of(context)?.settings.name == "/MyAlertsRoute")
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Colors.black),
-                    onPressed: () =>
-                        Navigator.of(context).pushNamed(SetAlertPage.route),
+                    onPressed: () => Navigator.of(context)
+                        .popAndPushNamed(SetAlertPage.route),
                     child: Text('Set Alerts',
                         style: TextStyle(color: Colors.white)),
                   ),

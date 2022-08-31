@@ -63,7 +63,7 @@ class MyAlerts extends StatelessWidget {
                   //   image: AssetImage('assets/background.jpg'),
                   // ),
                   ),
-              child: TabBar(labelColor: theme.primaryColor, tabs: [
+              child: TabBar(labelColor: theme.primaryColor, tabs: const [
                 Tab(
                   child: Text('Active'),
                 ),
@@ -74,10 +74,52 @@ class MyAlerts extends StatelessWidget {
             ),
             Expanded(
                 child: TabBarView(children: [
-              Container(
-                  // color: Colors.green,
-                  ),
-              PageView()
+              Column(
+                children: [
+                  Card(
+                      color: theme.primaryColor,
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: theme.backgroundColor,
+                          child: Center(
+                              child: Text('BTC',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold))),
+                        ),
+                        title: Text(
+                          "set an hour ago",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        subtitle: Text(
+                          "BTC went below 400 on CoinBase. Alert via SMS",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      )),
+                ],
+              ),
+              Column(
+                children: [
+                  Card(
+                      color: theme.primaryColor.withOpacity(0.5),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: theme.backgroundColor,
+                          child: Center(
+                              child: Text('BTC',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold))),
+                        ),
+                        title: Text(
+                          "set an hour ago",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        subtitle: Text(
+                          "BTC went below 400 on CoinBase. Alert via SMS",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      )),
+                ],
+              ),
             ]))
           ]),
         ),

@@ -1,4 +1,4 @@
-import 'package:crypto_ping_v1/pages/my_alerts.dart';
+import 'my_alerts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/alert_provider.dart';
@@ -75,6 +75,10 @@ class SetAlertPage extends StatelessWidget {
                       ),
                     )
                   ]),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('current price standing at \$37 an Eth'),
+                  ),
                   CryptoPlatformWidget(),
                 ]),
               ],

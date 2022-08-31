@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-cryptopingv1-dev-00924-authRole",
+      "UnauthRoleArn": "arn:aws:iam::295140146814:role/amplify-cryptopingv1-dev-00924-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::295140146814:role/amplify-cryptopingv1-dev-00924-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-cryptopingv1-dev-00924-deployment",
+      "UnauthRoleName": "amplify-cryptopingv1-dev-00924-unauthRole",
+      "StackName": "amplify-cryptopingv1-dev-00924",
+      "StackId": "arn:aws:cloudformation:us-east-1:295140146814:stack/amplify-cryptopingv1-dev-00924/2f732d70-28c1-11ed-8e99-12e488cd91f3",
+      "AmplifyAppId": "d1k97tld4tg5qh"
+    },
+    "categories": {
+      "auth": {
+        "cryptopingv1e7a7c983": {}
+      }
+    }
+  }
+}
