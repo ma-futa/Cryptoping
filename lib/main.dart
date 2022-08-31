@@ -4,6 +4,7 @@ import 'package:crypto_ping_v1/pages/my_alerts.dart';
 import 'package:crypto_ping_v1/pages/profile_page.dart';
 import 'package:crypto_ping_v1/pages/set_alert_page.dart';
 import 'package:crypto_ping_v1/providers/theme_provider.dart';
+import 'package:crypto_ping_v1/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +23,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<ThemeProvider>(
           create: (context) => ThemeProvider(),
+        ),
+        ChangeNotifierProvider<UserProvider>(
+          create: (context) => UserProvider(),
         ),
       ],
       child: MainMaterialApp(),

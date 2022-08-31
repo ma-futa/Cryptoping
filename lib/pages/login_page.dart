@@ -5,9 +5,6 @@ import 'package:simple_animations/stateless_animation/play_animation.dart';
 
 import 'package:crypto_ping_v1/pages/landing_page.dart';
 import 'package:crypto_ping_v1/pages/my_alerts.dart';
-import 'package:crypto_ping_v1/pages/set_alert_page.dart';
-
-import '../amplifyconfiguration.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -25,25 +22,6 @@ class _LoginPageState extends State<LoginPage> {
   initState() {
     super.initState();
     _horizontalPageController = PageController(initialPage: 0);
-    _configureAmplify();
-  }
-
-  Future<void> _configureAmplify() async {
-    // Add any Amplify plugins you want to use
-    final authPlugin = AmplifyAuthCognito();
-    await Amplify.addPlugin(authPlugin);
-
-    // You can use addPlugins if you are going to be adding multiple plugins
-    // await Amplify.addPlugins([authPlugin, analyticsPlugin]);
-
-    // Once Plugins are added, configure Amplify
-    // Note: Amplify can only be configured once.
-    try {
-      await Amplify.configure(amplifyconfig);
-    } on AmplifyAlreadyConfiguredException {
-      print(
-          "Tried to reconfigure Amplify; this can occur when your app restarts on Android.");
-    }
   }
 
   @override
@@ -187,6 +165,7 @@ class _SignupWidgetState extends State<SignupWidget> {
       print(e.message);
     }
     print('xxxxxxxxxxxxx5');
+    await loadCurrentUser(context);
   }
 
   @override
@@ -302,12 +281,11 @@ class LoginWidget extends StatefulWidget {
 
 class _LoginWidgetState extends State<LoginWidget> {
 // Create a boolean for checking the sign in status
-  bool isSignedIn = false;
   final _formKey = GlobalKey<FormState>();
   String _name = '';
   String _password = "";
 
-  Future<void> signInUser(String username, String password) async {
+  Future<void> signInUser() async {
     if (!_formKey.currentState!.validate()) {
       return;
     }
@@ -317,13 +295,13 @@ class _LoginWidgetState extends State<LoginWidget> {
         username: _name,
         password: _password,
       );
-
-      setState(() {
-        isSignedIn = !isSignedIn;
-      });
     } on AuthException catch (e) {
       print(e.message);
     }
+    final result = await Amplify.Auth.fetchUserAttributes();
+    print(result[0]);
+    await loadCurrentUser(context);
+    Navigator.of(context).pushReplacementNamed(MyAlerts.route);
   }
 
   @override
@@ -368,9 +346,7 @@ class _LoginWidgetState extends State<LoginWidget> {
             height: 15,
           ),
           ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pushReplacementNamed(MyAlerts.route);
-            },
+            onPressed: () async => await signInUser(),
             child: Text("Login"),
             style: ElevatedButton.styleFrom(primary: theme.primaryColor),
           ),
