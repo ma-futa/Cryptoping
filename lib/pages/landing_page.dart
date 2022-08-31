@@ -34,22 +34,20 @@ class LandingPage extends StatelessWidget {
             child: child,
           );
         },
-        onComplete: () {
-          _configureAmplify().then((value) async {
-            final isSignedin = await checkIfSignedIn();
-            if (isSignedin) {
-              await loadCurrentUser(context);
-              Navigator.of(context).pushReplacementNamed(MyAlerts.route);
-            } else {
-              Navigator.pushReplacement(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => LoginPage(),
-                  transitionDuration: const Duration(seconds: 0),
-                ),
-              );
-            }
-          });
+        onComplete: () async {
+          final isSignedin = await checkIfSignedIn();
+          if (isSignedin) {
+            await loadCurrentUser(context);
+            Navigator.of(context).pushReplacementNamed(MyAlerts.route);
+          } else {
+            Navigator.pushReplacement(
+              context,
+              PageRouteBuilder(
+                pageBuilder: (_, __, ___) => LoginPage(),
+                transitionDuration: const Duration(seconds: 0),
+              ),
+            );
+          }
         },
       ) //LandingPage(),
           ),
@@ -81,24 +79,6 @@ class LogoBanner extends StatelessWidget {
         )
       ],
     );
-  }
-}
-
-Future<void> _configureAmplify() async {
-  // Add any Amplify plugins you want to use
-  final authPlugin = AmplifyAuthCognito();
-  await Amplify.addPlugin(authPlugin);
-
-  // You can use addPlugins if you are going to be adding multiple plugins
-  // await Amplify.addPlugins([authPlugin, analyticsPlugin]);
-
-  // Once Plugins are added, configure Amplify
-  // Note: Amplify can only be configured once.
-  try {
-    await Amplify.configure(amplifyconfig);
-  } on AmplifyAlreadyConfiguredException {
-    print(
-        "Tried to reconfigure Amplify; this can occur when your app restarts on Android.");
   }
 }
 

@@ -1,6 +1,8 @@
+import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../pages/landing_page.dart';
 import '../pages/my_alerts.dart';
 import '../pages/profile_page.dart';
 import '../pages/set_alert_page.dart';
@@ -31,6 +33,7 @@ class MainDrawer extends StatelessWidget {
               // crossAxisAlignment: CrossAxisAlignment.stretch,
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                SizedBox(height: 200),
                 IconButton(
                     onPressed: () =>
                         Navigator.of(context).pushNamed(ProfilePage.route),
@@ -68,10 +71,28 @@ class MainDrawer extends StatelessWidget {
                     onPressed: (_) =>
                         Provider.of<ThemeProvider>(context, listen: false)
                             .changeTheme()),
-                SizedBox(height: 250),
+
+                Spacer(),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.black),
+                  onPressed: () async {
+                    await signoutMethod();
+                    Navigator.of(context).popAndPushNamed(LandingPage.route);
+                  },
+                  child: const Text('Signout',
+                      style: TextStyle(color: Colors.white)),
+                ),
               ],
             ),
           ),
         ));
+  }
+}
+
+Future<void> signoutMethod() async {
+  try {
+    final result = await Amplify.Auth.signOut();
+  } on AuthException catch (e) {
+    print(e.message);
   }
 }
