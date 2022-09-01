@@ -1,19 +1,25 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-cryptopingv1-dev-00924-authRole",
-      "UnauthRoleArn": "arn:aws:iam::295140146814:role/amplify-cryptopingv1-dev-00924-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::295140146814:role/amplify-cryptopingv1-dev-00924-authRole",
+      "AuthRoleName": "amplify-cryptopingv1-dev-223627-authRole",
+      "UnauthRoleArn": "arn:aws:iam::295140146814:role/amplify-cryptopingv1-dev-223627-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::295140146814:role/amplify-cryptopingv1-dev-223627-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-cryptopingv1-dev-00924-deployment",
-      "UnauthRoleName": "amplify-cryptopingv1-dev-00924-unauthRole",
-      "StackName": "amplify-cryptopingv1-dev-00924",
-      "StackId": "arn:aws:cloudformation:us-east-1:295140146814:stack/amplify-cryptopingv1-dev-00924/2f732d70-28c1-11ed-8e99-12e488cd91f3",
-      "AmplifyAppId": "d1k97tld4tg5qh"
+      "DeploymentBucketName": "amplify-cryptopingv1-dev-223627-deployment",
+      "UnauthRoleName": "amplify-cryptopingv1-dev-223627-unauthRole",
+      "StackName": "amplify-cryptopingv1-dev-223627",
+      "StackId": "arn:aws:cloudformation:us-east-1:295140146814:stack/amplify-cryptopingv1-dev-223627/5d605ac0-297d-11ed-bc14-12b765e3619f",
+      "AmplifyAppId": "d3rw3dy3umbsjn"
     },
     "categories": {
       "auth": {
-        "cryptopingv1e7a7c983": {}
+        "cryptopingv1513f1807": {}
+      },
+      "function": {
+        "cryptopingv135bcabf9": {
+          "deploymentBucketName": "amplify-cryptopingv1-dev-223627-deployment",
+          "s3Key": "amplify-builds/cryptopingv135bcabf9-44484b444f6b506e5368-build.zip"
+        }
       }
     }
   }

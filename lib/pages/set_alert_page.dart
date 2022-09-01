@@ -1,3 +1,8 @@
+import 'dart:typed_data';
+
+import 'package:amplify_api/amplify_api.dart';
+import 'package:amplify_flutter/amplify_flutter.dart';
+
 import 'my_alerts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -85,7 +90,11 @@ class SetAlertPage extends StatelessWidget {
             ),
             SizedBox(height: 40),
             ElevatedButton(
-              onPressed: () => Navigator.of(context).pushNamed(MyAlerts.route),
+              onPressed: () async {
+                await onTestApi();
+
+                Navigator.of(context).pushNamed(MyAlerts.route);
+              },
               child: Text("Set Alert"),
               style: ElevatedButton.styleFrom(primary: theme.primaryColor),
             ),
@@ -225,5 +234,21 @@ class CryptoPlatformWidget extends StatelessWidget {
         )
       ],
     );
+  }
+}
+
+Future<void> onTestApi() async {
+  try {
+    final options = RestOptions(
+        path: '/items',
+        body: Uint8List.fromList('{\'name\':\'Mow the lawn\'}'.codeUnits));
+    final restOperation = Amplify.API.post(restOptions: options);
+    final response = await restOperation.response;
+    print(
+        'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+    print('POST call succeeded');
+    print(String.fromCharCodes(response.data));
+  } on ApiException catch (e) {
+    print('POST call failed: $e');
   }
 }

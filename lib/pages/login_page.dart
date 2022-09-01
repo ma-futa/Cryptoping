@@ -159,6 +159,7 @@ class _SignupWidgetState extends State<SignupWidget> {
       final result = await Amplify.Auth.confirmSignUp(
           username: _name, confirmationCode: _confirmationCodeController.text);
       print('xxxxxxxxxxxxx4');
+      await loadCurrentUser(context);
       setState(() {
         isSignUpComplete = result.isSignUpComplete;
       });
@@ -166,7 +167,6 @@ class _SignupWidgetState extends State<SignupWidget> {
       print(e.message);
     }
     print('xxxxxxxxxxxxx5');
-    await loadCurrentUser(context);
   }
 
   @override

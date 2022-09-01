@@ -1,6 +1,6 @@
 {
   "auth": {
-    "cryptopingv1e7a7c983": {
+    "cryptopingv1513f1807": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -23,6 +23,29 @@
           "EMAIL"
         ]
       }
+    }
+  },
+  "function": {
+    "cryptopingv135bcabf9": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "api": {
+    "api1ba11f0a": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "cryptopingv135bcabf9",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
     }
   }
 }

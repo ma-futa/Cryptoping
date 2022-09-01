@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

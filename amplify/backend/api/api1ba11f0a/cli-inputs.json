@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/items": {
+      "name": "/items",
+      "lambdaFunction": "cryptopingv135bcabf9",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
