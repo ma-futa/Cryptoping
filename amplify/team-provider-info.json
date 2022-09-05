@@ -16,9 +16,9 @@
         "cryptopingv1513f1807": {}
       },
       "function": {
-        "cryptopingv135bcabf9": {
+        "createAlertFunction": {
           "deploymentBucketName": "amplify-cryptopingv1-dev-223627-deployment",
-          "s3Key": "amplify-builds/cryptopingv135bcabf9-44484b444f6b506e5368-build.zip"
+          "s3Key": "amplify-builds/createAlertFunction-633176366167356c716e-build.zip"
         }
       }
     }

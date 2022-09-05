@@ -1,9 +1,9 @@
 {
   "version": 1,
   "paths": {
-    "/items": {
-      "name": "/items",
-      "lambdaFunction": "cryptopingv135bcabf9",
+    "/createAlert": {
+      "name": "/createAlert",
+      "lambdaFunction": "createAlertFunction",
       "permissions": {
         "setting": "open"
       }

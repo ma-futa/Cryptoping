@@ -1,11 +1,12 @@
 class AlertModel {
-  String notificationMethode;
+  String? id;
+  String notificationMethod;
   String currency;
-  bool isAboveNotBelow;
+  String isAboveNotBelow;
   double price;
   String platform;
   AlertModel({
-    required this.notificationMethode,
+    required this.notificationMethod,
     required this.currency,
     required this.isAboveNotBelow,
     required this.price,

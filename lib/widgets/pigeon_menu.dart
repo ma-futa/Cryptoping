@@ -20,8 +20,8 @@ class PigeonMenu extends StatelessWidget {
             color: theme.primaryColor,
           ),
         ),
-        padding: EdgeInsets.all(5),
-        margin: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
+        margin: const EdgeInsets.all(5),
         child: Image.asset(
           'assets/pigeon.png',
           color: theme.primaryColor,

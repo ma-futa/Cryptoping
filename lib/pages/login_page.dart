@@ -35,13 +35,13 @@ class _LoginPageState extends State<LoginPage> {
         alignment: Alignment.center,
         children: [
           PlayAnimation<double>(
-            delay: Duration(milliseconds: 200),
+            delay: const Duration(milliseconds: 200),
             tween: Tween(begin: 0.0, end: 1.0),
             duration: const Duration(milliseconds: 500),
             curve: Curves.easeOut,
             builder: (context, child, value) => Transform.translate(
               offset: Offset(0, value * -260),
-              child: LogoBanner(),
+              child: const LogoBanner(),
             ),
           ),
           PlayAnimation<double>(
@@ -58,14 +58,14 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(width: 3, color: theme.primaryColor),
                   ),
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: Column(
                     children: [
                       Expanded(
                         child: PageView(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           controller: _horizontalPageController,
-                          children: [
+                          children: const [
                             SignupWidget(),
                             LoginWidget(),
                           ],
@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                             isLogin = _horizontalPageController.page == 0;
                             _horizontalPageController.animateToPage(
                                 isLogin ? 1 : 0,
-                                duration: Duration(milliseconds: 300),
+                                duration: const Duration(milliseconds: 300),
                                 curve: Curves.easeIn);
                           },
                           child: isLogin
@@ -150,7 +150,7 @@ class _SignupWidgetState extends State<SignupWidget> {
     }
     print('xxxxxxxxxxxxx33');
     _verticalPageController.animateToPage(1,
-        duration: Duration(microseconds: 300), curve: Curves.easeIn);
+        duration: const Duration(microseconds: 300), curve: Curves.easeIn);
   }
 
   Future<void> confirmUser() async {
@@ -173,7 +173,7 @@ class _SignupWidgetState extends State<SignupWidget> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return PageView(
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       scrollDirection: Axis.vertical,
       controller: _verticalPageController,
       children: [
@@ -187,11 +187,12 @@ class _SignupWidgetState extends State<SignupWidget> {
                   if (value == null) {
                     return 'Please provide a name';
                   }
+                  return null;
                 }),
                 onSaved: (newValue) {
                   _name = newValue!;
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: "Name",
                 ),
               ),
@@ -200,11 +201,12 @@ class _SignupWidgetState extends State<SignupWidget> {
                   if (value == null) {
                     return 'Please provide an email';
                   }
+                  return null;
                 }),
                 onSaved: (newValue) {
                   _email = newValue!;
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Email',
                 ),
               ),
@@ -213,11 +215,12 @@ class _SignupWidgetState extends State<SignupWidget> {
                   if (value == null) {
                     return 'Please provide valid phone number';
                   }
+                  return null;
                 }),
                 onSaved: (newValue) {
                   _number = newValue!;
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Phone number',
                 ),
               ),
@@ -230,23 +233,24 @@ class _SignupWidgetState extends State<SignupWidget> {
                   if (value.length < 7) {
                     return 'Password should be minimum 7 characters';
                   }
+                  return null;
                 },
                 onSaved: (value) {
                   _password = value!;
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: "Password",
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               ElevatedButton(
                 onPressed: () async {
                   await signUpUser();
                 },
-                child: Text("sign up"),
                 style: ElevatedButton.styleFrom(primary: theme.primaryColor),
+                child: const Text("sign up"),
               ),
               const Spacer(),
 
@@ -265,7 +269,7 @@ class _SignupWidgetState extends State<SignupWidget> {
           children: [
             TextField(
               controller: _confirmationCodeController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "Confirmation code",
               ),
             ),
@@ -275,7 +279,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                 Navigator.of(context).pushReplacementNamed(MyAlerts.route);
               },
               style: ElevatedButton.styleFrom(primary: theme.primaryColor),
-              child: Text("Confirm"),
+              child: const Text("Confirm"),
             )
           ],
         )
@@ -304,16 +308,10 @@ class _LoginWidgetState extends State<LoginWidget> {
       return;
     }
     _formKey.currentState!.save();
-    try {
-      final result = await Amplify.Auth.signIn(
-        username: _name,
-        password: _password,
-      );
-    } on AuthException catch (e) {
+    try {} on AuthException catch (e) {
       print(e.message);
     }
-    final result = await Amplify.Auth.fetchUserAttributes();
-    print(result[0]);
+    await Amplify.Auth.signIn(username: _name, password: _password);
     await loadCurrentUser(context);
     Navigator.of(context).pushReplacementNamed(MyAlerts.route);
   }
@@ -331,11 +329,12 @@ class _LoginWidgetState extends State<LoginWidget> {
               if (value == null) {
                 return 'Please provide a name';
               }
+              return null;
             }),
             onSaved: (newValue) {
               _name = newValue!;
             },
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: "Name",
             ),
           ),
@@ -347,22 +346,23 @@ class _LoginWidgetState extends State<LoginWidget> {
               if (value.length < 7) {
                 return 'Password should be minimum 7 characters';
               }
+              return null;
             },
             onSaved: (value) {
               _password = value!;
             },
             obscureText: true,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: "Password",
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           ElevatedButton(
             onPressed: () async => await signInUser(),
-            child: Text("Login"),
             style: ElevatedButton.styleFrom(primary: theme.primaryColor),
+            child: const Text("Login"),
           ),
           const Spacer(),
           // TextButton(

@@ -11,7 +11,7 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "function": {
-        "cryptopingv135bcabf9": {
+        "createAlertFunction": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
@@ -19,10 +19,15 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "api": {
-        "api1ba11f0a": {
+        "pingapi": {
             "RootUrl": "string",
             "ApiName": "string",
             "ApiId": "string"
+        },
+        "pingGraphQL": {
+            "GraphQLAPIKeyOutput": "string",
+            "GraphQLAPIIdOutput": "string",
+            "GraphQLAPIEndpointOutput": "string"
         }
     }
 }

@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,13 +26,13 @@ class MainDrawer extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(height: 200),
+                const SizedBox(height: 200),
                 IconButton(
                     onPressed: () =>
                         Navigator.of(context).pushNamed(ProfilePage.route),
                     icon: const Icon(Icons.account_circle),
                     iconSize: 45),
-                Text('Welcome back'),
+                const Text('Welcome back'),
                 Text(Provider.of<UserProvider>(context).getUser.name),
                 const SizedBox(height: 20),
                 if (ModalRoute.of(context)?.settings.name ==
@@ -51,23 +49,26 @@ class MainDrawer extends StatelessWidget {
                     style: ElevatedButton.styleFrom(primary: Colors.black),
                     onPressed: () => Navigator.of(context)
                         .popAndPushNamed(SetAlertPage.route),
-                    child: Text('Set Alerts',
-                        style: TextStyle(color: Colors.white)),
+                    child: const Text('Set Alerts',
+                        style: const TextStyle(color: Colors.white)),
                   ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ToggleButtons(
                     borderRadius: BorderRadius.circular(30),
                     selectedColor: Colors.black,
                     fillColor: theme.backgroundColor,
-                    children: [Icon(Icons.sunny), Icon(Icons.nightlight)],
                     isSelected: [
                       Provider.of<ThemeProvider>(context).getThemeValue,
                       !Provider.of<ThemeProvider>(context).getThemeValue
                     ],
                     onPressed: (_) =>
                         Provider.of<ThemeProvider>(context, listen: false)
-                            .changeTheme()),
-                Spacer(),
+                            .changeTheme(),
+                    children: [
+                      const Icon(Icons.sunny),
+                      const Icon(Icons.nightlight)
+                    ]),
+                const Spacer(),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: Colors.black),
                   onPressed: () async {
@@ -86,7 +87,7 @@ class MainDrawer extends StatelessWidget {
 
 Future<void> signoutMethod() async {
   try {
-    final result = await Amplify.Auth.signOut();
+    await Amplify.Auth.signOut();
   } on AuthException catch (e) {
     print(e.message);
   }

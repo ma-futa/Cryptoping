@@ -11,4 +11,7 @@ class UserProvider extends ChangeNotifier {
   }
 
   get getUser => _user;
+  get getName => _user.name;
+  get getEmail => _user.email;
+  get getNumber => _user.number;
 }

@@ -2,42 +2,48 @@ import 'package:crypto_ping_v1/models/alert_model.dart';
 import 'package:flutter/cupertino.dart';
 
 class AlertProvider extends ChangeNotifier {
-  // AlertModel _value = new AlertModel();
+  AlertModel _alert = AlertModel(
+      currency: 'BTC',
+      isAboveNotBelow: 'above',
+      notificationMethod: 'Email',
+      platform: 'CoinBase',
+      price: 0.0);
 
-  int _notificationMethod = 0;
-  int _currency = 0;
-  int _isAbove = 0;
-  double _price = 0.0;
-  int _cryptoPlatform = 0;
-
-  void setNotificationMethod(int val) {
-    _notificationMethod = val;
+  void setAlert(AlertModel alert) {
+    _alert = alert;
     notifyListeners();
   }
 
-  void setCurrency(int val) {
-    _currency = val;
+  get getAlert => _alert;
+
+  void setNotificationMethod(String val) {
+    _alert.notificationMethod = val;
     notifyListeners();
   }
 
-  void setIsAbove(int val) {
-    _isAbove = val;
+  void setCurrency(String val) {
+    _alert.currency = val;
+    notifyListeners();
+  }
+
+  void setIsAbove(String val) {
+    _alert.isAboveNotBelow = val;
     notifyListeners();
   }
 
   void setPrice(double val) {
-    _price = val;
+    _alert.price = val;
     notifyListeners();
   }
 
-  void setCrptoPlatform(int val) {
-    _cryptoPlatform = val;
+  void setCrptoPlatform(String val) {
+    _alert.platform = val;
     notifyListeners();
   }
 
-  get getNotificationMethod => _notificationMethod;
-  get getCurrency => _currency;
-  get getIsAbove => _isAbove;
-  get getPrice => _price;
-  get getCryptoPlatform => _cryptoPlatform;
+  get getNotificationMethod => _alert.notificationMethod;
+  get getCurrency => _alert.currency;
+  get getIsAboveNotBelow => _alert.isAboveNotBelow;
+  get getPrice => _alert.price;
+  get getCryptoPlatform => _alert.platform;
 }

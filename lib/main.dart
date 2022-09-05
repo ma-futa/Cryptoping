@@ -1,6 +1,10 @@
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+
 import 'package:crypto_ping_v1/pages/landing_page.dart';
 import 'package:crypto_ping_v1/pages/login_page.dart';
 import 'package:crypto_ping_v1/pages/my_alerts.dart';
@@ -8,11 +12,11 @@ import 'package:crypto_ping_v1/pages/profile_page.dart';
 import 'package:crypto_ping_v1/pages/set_alert_page.dart';
 import 'package:crypto_ping_v1/providers/theme_provider.dart';
 import 'package:crypto_ping_v1/providers/user_provider.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+
+import 'package:amplify_datastore/amplify_datastore.dart';
 
 import 'amplifyconfiguration.dart';
+import 'models/ModelProvider.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -38,7 +42,8 @@ class _MyAppState extends State<MyApp> {
     // Add any Amplify plugins you want to use
     final auth = AmplifyAuthCognito();
     final api = AmplifyAPI();
-    await Amplify.addPlugins([api, auth]);
+    final datastore = AmplifyDataStore(modelProvider: ModelProvider.instance);
+    await Amplify.addPlugins([api, auth, datastore]);
 
     // You can use addPlugins if you are going to be adding multiple plugins
     // await Amplify.addPlugins([authPlugin, analyticsPlugin]);
@@ -64,7 +69,7 @@ class _MyAppState extends State<MyApp> {
           create: (context) => UserProvider(),
         ),
       ],
-      child: MainMaterialApp(),
+      child: const MainMaterialApp(),
     );
   }
 }
@@ -83,16 +88,16 @@ class MainMaterialApp extends StatelessWidget {
           ? ThemeMode.light
           : ThemeMode.dark,
       darkTheme: ThemeData(
-        backgroundColor: Color.fromARGB(129, 44, 62, 80),
-        primaryColor: Color.fromARGB(255, 88, 121, 154),
+        backgroundColor: const Color.fromARGB(129, 44, 62, 80),
+        primaryColor: const Color.fromARGB(255, 88, 121, 154),
         hintColor: Colors.white,
       ),
       theme: ThemeData(
-        backgroundColor: Color(0xFFecf0f1),
-        primaryColor: Color.fromARGB(255, 88, 121, 154),
+        backgroundColor: const Color(0xFFecf0f1),
+        primaryColor: const Color.fromARGB(255, 88, 121, 154),
         hintColor: Colors.black,
       ),
-      home: LandingPage(),
+      home: const LandingPage(),
       routes: {
         LandingPage.route: (context) => const LandingPage(),
         LoginPage.route: (context) => const LoginPage(),

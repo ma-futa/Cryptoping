@@ -47,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "cryptopingv135bcabf9",
+            "createAlertFunction",
             {
               "Fn::Join": [
                 "",
                 [
-                  "cryptopingv135bcabf9",
+                  "createAlertFunction",
                   "-",
                   {
                     "Ref": "env"
@@ -89,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "cryptopingv1LambdaRole44c9991b",
+            "cryptopingv1LambdaRoleee1ca18e",
             {
               "Fn::Join": [
                 "",
                 [
-                  "cryptopingv1LambdaRole44c9991b",
+                  "cryptopingv1LambdaRoleee1ca18e",
                   "-",
                   {
                     "Ref": "env"

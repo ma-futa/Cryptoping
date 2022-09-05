@@ -1,10 +1,9 @@
-import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
-import 'package:crypto_ping_v1/amplifyconfiguration.dart';
-import 'package:crypto_ping_v1/pages/my_alerts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/stateless_animation/play_animation.dart';
+
+import 'package:crypto_ping_v1/pages/my_alerts.dart';
 
 import '../models/user_model.dart';
 import '../providers/user_provider.dart';
@@ -27,7 +26,7 @@ class LandingPage extends StatelessWidget {
         duration: const Duration(milliseconds: 1000),
         curve: Curves.easeInCubic,
         child:
-            LogoBanner(), //Container(height: 100, width: 100, color: Colors.amber),
+            const LogoBanner(), //Container(height: 100, width: 100, color: Colors.amber),
         builder: (context, child, value) {
           return Opacity(
             opacity: value,
@@ -43,7 +42,7 @@ class LandingPage extends StatelessWidget {
             Navigator.pushReplacement(
               context,
               PageRouteBuilder(
-                pageBuilder: (_, __, ___) => LoginPage(),
+                pageBuilder: (_, __, ___) => const LoginPage(),
                 transitionDuration: const Duration(seconds: 0),
               ),
             );

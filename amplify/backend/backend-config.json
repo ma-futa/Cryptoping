@@ -26,26 +26,42 @@
     }
   },
   "function": {
-    "cryptopingv135bcabf9": {
+    "createAlertFunction": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
   "api": {
-    "api1ba11f0a": {
+    "pingapi": {
       "service": "API Gateway",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "cryptopingv135bcabf9",
+          "resourceName": "createAlertFunction",
           "attributes": [
             "Name",
             "Arn"
           ]
         }
       ]
+    },
+    "pingGraphQL": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            }
+          },
+          "additionalAuthenticationProviders": []
+        }
+      }
     }
   }
 }
