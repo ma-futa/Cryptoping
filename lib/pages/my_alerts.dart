@@ -1,5 +1,4 @@
 import 'package:amplify_flutter/amplify_flutter.dart';
-import 'package:crypto_ping_v1/pages/set_alert_page.dart';
 import 'package:flutter/material.dart';
 
 import '../models/Alert.dart';
@@ -77,13 +76,11 @@ class MyAlerts extends StatelessWidget {
             FutureBuilder<List<Alert>>(
                 future: readFromDatabase(),
                 builder: (context, snapshot) {
-                  if (snapshot.data == null || snapshot.data!.length == 0) {
+                  if (snapshot.data == null || snapshot.data!.isEmpty) {
                     return const Center(
                       child: Text('Please create new Alerts👍'),
                     );
                   } else {
-                    print('xxxxxxxxxxxxxxxxx');
-                    print(snapshot.data);
                     final activeAlerts = snapshot.data!
                         .where((element) => element.isActive == 'true')
                         .toList();
@@ -92,33 +89,40 @@ class MyAlerts extends StatelessWidget {
                         .toList();
                     return Expanded(
                       child: TabBarView(children: [
-                        Column(
-                            children: activeAlerts
-                                .map((e) => AlertItemWidget(alert: e))
-                                .toList()),
-                        Column(
-                          children: [
-                            Card(
-                                color: theme.primaryColor.withOpacity(0.5),
-                                child: ListTile(
-                                  leading: CircleAvatar(
-                                    backgroundColor: theme.backgroundColor,
-                                    child: const Center(
-                                        child: Text('BTC',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold))),
-                                  ),
-                                  title: const Text(
-                                    "set an hour ago",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  subtitle: const Text(
-                                    "BTC went below 400 on CoinBase. Alert via SMS",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                )),
-                          ],
+                        ListView(
+                          children: activeAlerts
+                              .map((e) => AlertItemWidget(alert: e))
+                              .toList(),
                         ),
+                        ListView(
+                          children: historicAlerts
+                              .map((e) => AlertItemWidget(alert: e))
+                              .toList(),
+                        ),
+
+                        // Column(
+                        //   children: [
+                        //     Card(
+                        //         color: theme.primaryColor.withOpacity(0.5),
+                        //         child: ListTile(
+                        //           leading: CircleAvatar(
+                        //             backgroundColor: theme.backgroundColor,
+                        //             child: const Center(
+                        //                 child: Text('BTC',
+                        //                     style: TextStyle(
+                        //                         fontWeight: FontWeight.bold))),
+                        //           ),
+                        //           title: const Text(
+                        //             "set an hour ago",
+                        //             style: TextStyle(color: Colors.white),
+                        //           ),
+                        //           subtitle: const Text(
+                        //             "BTC went below 400 on CoinBase. Alert via SMS",
+                        //             style: TextStyle(color: Colors.white),
+                        //           ),
+                        //         )),
+                        //   ],
+                        // ),
                       ]),
                     );
                   }
@@ -148,15 +152,15 @@ class AlertItemWidget extends StatelessWidget {
             backgroundColor: theme.backgroundColor,
             child: Center(
                 child: Text(alert.currency,
-                    style: TextStyle(fontWeight: FontWeight.bold))),
+                    style: const TextStyle(fontWeight: FontWeight.bold))),
           ),
           title: Text(
             "set an hour ago ${DateTime.parse(alert.created)}",
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
           subtitle: Text(
-            "${alert.currency} went ${alert.aboveOrBelow} ${alert.price} on ${alert.platform}. Alert via ${alert.notificationMethod}",
-            style: TextStyle(color: Colors.white),
+            "${alert.currency} went ${alert.aboveOrBelow} ${alert.price}. Alert via ${alert.notificationMethod}",
+            style: const TextStyle(color: Colors.white),
           ),
         ));
   }
@@ -166,11 +170,12 @@ Future<List<Alert>> readFromDatabase() async {
   List<Alert> alerts = [];
   try {
     alerts = await Amplify.DataStore.query(Alert.classType);
-    print('dddddddddddddddddddddddddddddddddd');
-    print('alerts: $alerts');
   } on DataStoreException catch (e) {
+    // ignore: avoid_print
     print('Query failed: $e');
   } finally {
+    print('dddddddddddddddddddd');
+    print(alerts);
     return alerts;
   }
 }

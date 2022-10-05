@@ -1,6 +1,7 @@
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:crypto_ping_v1/providers/load_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +44,11 @@ class _MyAppState extends State<MyApp> {
     final auth = AmplifyAuthCognito();
     final api = AmplifyAPI();
     final datastore = AmplifyDataStore(modelProvider: ModelProvider.instance);
-    await Amplify.addPlugins([api, auth, datastore]);
+    await Amplify.addPlugins([
+      api,
+      auth,
+      datastore,
+    ]);
 
     // You can use addPlugins if you are going to be adding multiple plugins
     // await Amplify.addPlugins([authPlugin, analyticsPlugin]);
@@ -67,6 +72,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider<UserProvider>(
           create: (context) => UserProvider(),
+        ),
+        ChangeNotifierProvider<LoadProvider>(
+          create: (context) => LoadProvider(),
         ),
       ],
       child: const MainMaterialApp(),

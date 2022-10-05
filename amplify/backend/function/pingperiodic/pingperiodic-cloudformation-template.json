@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Lambda Function resource stack creation using Amplify CLI",
+  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"10.0.0\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -47,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "createAlertFunction",
+            "pingperiodic",
             {
               "Fn::Join": [
                 "",
                 [
-                  "createAlertFunction",
+                  "pingperiodic",
                   "-",
                   {
                     "Ref": "env"
@@ -89,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "cryptopingv1LambdaRolef0205145",
+            "cryptopingv1LambdaRolece76014e",
             {
               "Fn::Join": [
                 "",
                 [
-                  "cryptopingv1LambdaRolef0205145",
+                  "cryptopingv1LambdaRolece76014e",
                   "-",
                   {
                     "Ref": "env"

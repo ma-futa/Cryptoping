@@ -9,7 +9,8 @@
       "UnauthRoleName": "amplify-cryptopingv1-dev-223627-unauthRole",
       "StackName": "amplify-cryptopingv1-dev-223627",
       "StackId": "arn:aws:cloudformation:us-east-1:295140146814:stack/amplify-cryptopingv1-dev-223627/5d605ac0-297d-11ed-bc14-12b765e3619f",
-      "AmplifyAppId": "d3rw3dy3umbsjn"
+      "AmplifyAppId": "d3rw3dy3umbsjn",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-cryptopingv1-dev-223627-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "auth": {
@@ -18,7 +19,11 @@
       "function": {
         "createAlertFunction": {
           "deploymentBucketName": "amplify-cryptopingv1-dev-223627-deployment",
-          "s3Key": "amplify-builds/createAlertFunction-633176366167356c716e-build.zip"
+          "s3Key": "amplify-builds/createAlertFunction-51494935486549554b47-build.zip"
+        },
+        "pingperiodic": {
+          "deploymentBucketName": "amplify-cryptopingv1-dev-223627-deployment",
+          "s3Key": "amplify-builds/pingperiodic-652f5978694374414573-build.zip"
         }
       }
     }

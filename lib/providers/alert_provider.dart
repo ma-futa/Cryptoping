@@ -6,7 +6,6 @@ class AlertProvider extends ChangeNotifier {
       currency: 'BTC',
       isAboveNotBelow: 'above',
       notificationMethod: 'Email',
-      platform: 'CoinBase',
       price: 0.0);
 
   void setAlert(AlertModel alert) {
@@ -36,14 +35,8 @@ class AlertProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setCrptoPlatform(String val) {
-    _alert.platform = val;
-    notifyListeners();
-  }
-
   get getNotificationMethod => _alert.notificationMethod;
   get getCurrency => _alert.currency;
   get getIsAboveNotBelow => _alert.isAboveNotBelow;
   get getPrice => _alert.price;
-  get getCryptoPlatform => _alert.platform;
 }

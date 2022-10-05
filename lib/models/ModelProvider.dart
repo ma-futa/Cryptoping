@@ -26,7 +26,7 @@ export 'Alert.dart';
 
 class ModelProvider implements ModelProviderInterface {
   @override
-  String version = "ad16e65df80ff828a8e1d30dbfc3fb57";
+  String version = "addb2ffc12d304339c1e68560ef978d6";
   @override
   List<ModelSchema> modelSchemas = [Alert.schema];
   static final ModelProvider _instance = ModelProvider();

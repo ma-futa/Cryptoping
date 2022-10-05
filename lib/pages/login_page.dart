@@ -1,10 +1,13 @@
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_animations/stateless_animation/play_animation.dart';
 
 import 'package:crypto_ping_v1/pages/landing_page.dart';
 import 'package:crypto_ping_v1/pages/my_alerts.dart';
+
+import '../providers/load_provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -154,7 +157,9 @@ class _SignupWidgetState extends State<SignupWidget> {
   }
 
   Future<void> confirmUser() async {
+    var isLoading = Provider.of<LoadProvider>(context, listen: false);
     try {
+      isLoading.setIsLoading();
       print('xxxxxxxxxxxxx34');
       final result = await Amplify.Auth.confirmSignUp(
           username: _name, confirmationCode: _confirmationCodeController.text);
@@ -166,6 +171,7 @@ class _SignupWidgetState extends State<SignupWidget> {
     } on AuthException catch (e) {
       print(e.message);
     }
+    isLoading.setIsLoading();
     print('xxxxxxxxxxxxx5');
   }
 
@@ -273,14 +279,19 @@ class _SignupWidgetState extends State<SignupWidget> {
                 hintText: "Confirmation code",
               ),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                await confirmUser();
-                Navigator.of(context).pushReplacementNamed(MyAlerts.route);
-              },
-              style: ElevatedButton.styleFrom(primary: theme.primaryColor),
-              child: const Text("Confirm"),
-            )
+            if (!Provider.of<LoadProvider>(context).getIsLoading)
+              ElevatedButton(
+                onPressed: () async {
+                  await confirmUser();
+                  Navigator.of(context).pushReplacementNamed(MyAlerts.route);
+                },
+                style: ElevatedButton.styleFrom(primary: theme.primaryColor),
+                child: const Text("Confirm"),
+              ),
+            if (Provider.of<LoadProvider>(context).getIsLoading)
+              CircularProgressIndicator(
+                color: theme.primaryColor,
+              ),
           ],
         )
       ],
@@ -311,8 +322,11 @@ class _LoginWidgetState extends State<LoginWidget> {
     try {} on AuthException catch (e) {
       print(e.message);
     }
+    var isLoading = Provider.of<LoadProvider>(context, listen: false);
+    isLoading.setIsLoading();
     await Amplify.Auth.signIn(username: _name, password: _password);
     await loadCurrentUser(context);
+    isLoading.setIsLoading();
     Navigator.of(context).pushReplacementNamed(MyAlerts.route);
   }
 
@@ -359,11 +373,16 @@ class _LoginWidgetState extends State<LoginWidget> {
           const SizedBox(
             height: 15,
           ),
-          ElevatedButton(
-            onPressed: () async => await signInUser(),
-            style: ElevatedButton.styleFrom(primary: theme.primaryColor),
-            child: const Text("Login"),
-          ),
+          if (!Provider.of<LoadProvider>(context).getIsLoading)
+            ElevatedButton(
+              onPressed: () async => await signInUser(),
+              style: ElevatedButton.styleFrom(primary: theme.primaryColor),
+              child: const Text("Login"),
+            ),
+          if (Provider.of<LoadProvider>(context).getIsLoading)
+            CircularProgressIndicator(
+              color: theme.primaryColor,
+            ),
           const Spacer(),
           // TextButton(
           //     onPressed: () => setState(() {

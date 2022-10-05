@@ -75,7 +75,6 @@ class SetAlertPage extends StatelessWidget {
                     padding: EdgeInsets.all(8.0),
                     child: Text('current price standing at \$37 an Eth'),
                   ),
-                  CryptoPlatformWidget(),
                 ]),
               ],
             ),
@@ -93,19 +92,18 @@ class SetAlertPage extends StatelessWidget {
                         prov.getNotificationMethod == 'Email'
                             ? user.getEmail
                             : user.getNumber,
+                    ownerId: user.id,
                     owner: user.getName,
                     currency: prov.getCurrency,
                     aboveOrBelow: prov.getIsAboveNotBelow,
                     isActive: 'true',
                     price: prov.getPrice.toString(),
-                    platform: prov.getCryptoPlatform,
                     created: DateTime.now().toIso8601String(),
                   ));
+
                   print('xxxxxxxxxxxxxxxxxxxxxxx');
-                  // await readFromDatabase();
-                  // await onTestApi();
-                  // await savePost();
-                  // await readFromDatabase();
+
+                  await onCreateAlert();
                   Navigator.of(context).pushNamed(MyAlerts.route);
                 },
                 style: ElevatedButton.styleFrom(primary: theme.primaryColor),
@@ -241,48 +239,46 @@ class IsAboveWidget extends StatelessWidget {
   }
 }
 
-class CryptoPlatformWidget extends StatelessWidget {
-  CryptoPlatformWidget({
-    Key? key,
-  }) : super(key: key);
+// class CryptoPlatformWidget extends StatelessWidget {
+//   CryptoPlatformWidget({
+//     Key? key,
+//   }) : super(key: key);
 
-  final list = ['CoinBase', 'Binance', 'Cryptomaster'];
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Row(
-      children: [
-        Text('on ', style: TextStyle(color: theme.hintColor)),
-        DropdownButton<String>(
-          focusColor: theme.splashColor,
-          value: Provider.of<AlertProvider>(context).getCryptoPlatform,
-          alignment: Alignment.center,
-          items: list
-              .map((item) => DropdownMenuItem(
-                    value: item,
-                    child: Text(item),
-                  ))
-              .toList(),
-          onChanged: (val) {
-            Provider.of<AlertProvider>(context, listen: false)
-                .setCrptoPlatform(val!);
-            print('xes');
-          },
-        )
-      ],
-    );
-  }
-}
+//   final list = ['CoinBase', 'Binance', 'Cryptomaster'];
+//   @override
+//   Widget build(BuildContext context) {
+//     final theme = Theme.of(context);
+//     return Row(
+//       children: [
+//         Text('on ', style: TextStyle(color: theme.hintColor)),
+//         DropdownButton<String>(
+//           focusColor: theme.splashColor,
+//           value: Provider.of<AlertProvider>(context).getCryptoPlatform,
+//           alignment: Alignment.center,
+//           items: list
+//               .map((item) => DropdownMenuItem(
+//                     value: item,
+//                     child: Text(item),
+//                   ))
+//               .toList(),
+//           onChanged: (val) {
+//             Provider.of<AlertProvider>(context, listen: false)
+//                 .setCrptoPlatform(val!);
+//             print('xes');
+//           },
+//         )
+//       ],
+//     );
+//   }
+// }
 
-Future<void> onTestApi() async {
+Future<void> onCreateAlert() async {
   try {
     final options = RestOptions(
-        path: '/createAlert',
+        path: "/createAlert",
         body: Uint8List.fromList('{\'name\':\'Mow the lawn\'}'.codeUnits));
     final restOperation = Amplify.API.post(restOptions: options);
     final response = await restOperation.response;
-    print(
-        'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
     print('POST call succeeded');
     print(String.fromCharCodes(response.data));
   } on ApiException catch (e) {
